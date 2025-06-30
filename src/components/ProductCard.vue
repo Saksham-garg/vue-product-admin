@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { usePriceCalculator } from "../composables/usePriceCalculator";
+import { calculatePriceDetails } from "utils/price";
 import type { Product } from "../types/productType";
 
 const props = defineProps<{
@@ -7,7 +7,7 @@ const props = defineProps<{
 }>();
 
 const netPrice = props.product.price.toFixed(2);
-const { grossPrice } = usePriceCalculator(
+const { grossPrice } = calculatePriceDetails(
   props.product.price,
   props.product.taxRate ?? 0
 );
