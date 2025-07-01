@@ -1,0 +1,84 @@
+<script setup lang="ts">
+import { onMounted } from "vue";
+import { useRouter } from "vue-router";
+import { useProductStore } from "../../store/productStore";
+import { storeToRefs } from "pinia";
+import ProductCard from "components/ProductCard/ProductCard.vue";
+
+const store = useProductStore();
+const { products } = storeToRefs(store);
+const router = useRouter();
+
+onMounted(() => {
+  if (store.products.length === 0) {
+    store.fetchProducts();
+  }
+});
+
+function refreshProducts() {
+  store.fetchProducts();
+}
+
+function editProduct(id: number) {
+  router.push(`/product/${id}`);
+}
+</script>
+
+<template>
+  <div class="product-list">
+    <div class="product-list__header">
+      <h1 class="product-list__title">Product Administration</h1>
+      <button class="product-list__refresh" @click="refreshProducts">
+        Refresh
+      </button>
+    </div>
+
+    <div class="product-list__grid">
+      <ProductCard
+        v-for="p in products"
+        :key="p.id"
+        :product="p"
+        @edit="editProduct(p.id)"
+      />
+    </div>
+  </div>
+</template>
+
+<style scoped lang="scss">
+.product-list {
+  padding: 2rem;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  &__title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+
+  &__refresh {
+    background: var(--color-primary);
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--radius);
+    font-weight: 500;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: var(--color-accent);
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+}
+</style>
