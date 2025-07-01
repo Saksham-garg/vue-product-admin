@@ -5,6 +5,7 @@ import { useProductStore } from "../../store/productStore";
 import { storeToRefs } from "pinia";
 import ProductCard from "components/ProductCard/ProductCard.vue";
 import ProductCardSkeleton from "components/ProductCardSkeleton/ProductCardSkeleton.vue";
+import "./ProductList.scss";
 
 const store = useProductStore();
 const { products, loading } = storeToRefs(store);
@@ -50,41 +51,4 @@ function editProduct(id: number) {
   </div>
 </template>
 
-<style scoped lang="scss">
-.product-list {
-  padding: 2rem;
-
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-  }
-
-  &__title {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: var(--color-primary);
-  }
-
-  &__refresh {
-    background: var(--color-primary);
-    color: #fff;
-    border: none;
-    padding: 0.6rem 1.2rem;
-    border-radius: var(--radius);
-    font-weight: 500;
-    transition: background 0.2s ease;
-
-    &:hover {
-      background: var(--color-accent);
-    }
-  }
-
-  &__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1.5rem;
-  }
-}
-</style>
+<style scoped lang="scss"></style>

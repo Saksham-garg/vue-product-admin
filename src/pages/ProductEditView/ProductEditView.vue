@@ -2,8 +2,6 @@
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useProductStore } from "../../store/productStore";
-// Update the import path below to the correct relative path where your productType.ts file is located.
-// For example, if it's in src/types/productType.ts, use the following:
 import { type Product } from "../../types/productType";
 import ProductEditForm from "components/ProductEditForm/ProductEditForm.vue";
 import { useToast } from "composables/useToast";
