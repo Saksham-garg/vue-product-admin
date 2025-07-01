@@ -21,6 +21,7 @@ export const useProductStore = defineStore("product", {
           id: item.id,
           title: item.title,
           price: item.price,
+          image: item.image,
           category: item.category,
           taxRate: 19, // Default tax rate for new items
         }));
