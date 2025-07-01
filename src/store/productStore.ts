@@ -34,14 +34,16 @@ export const useProductStore = defineStore("product", {
     },
 
     updateProduct(updatedProduct: Product) {
-      const index = this.products.findIndex((p) => p.id === updatedProduct.id);
+      const index = this.products.findIndex(
+        (p: Product) => p.id === updatedProduct.id
+      );
       if (index !== -1) {
         this.products[index] = { ...updatedProduct };
       }
     },
 
     getProductById(id: number): Product | undefined {
-      return this.products.find((p) => p.id === id);
+      return this.products.find((p: Product) => p.id === id);
     },
   },
 });

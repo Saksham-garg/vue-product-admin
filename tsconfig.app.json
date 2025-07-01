@@ -13,14 +13,14 @@
     "rootDir": "src",
     "baseUrl": ".",
     "paths": {
-      "utils/*": ["./src/utils"],
-      "router/*": ["./src/router"],
-      "types/*": ["./src/types"],
-      "assets/*": ["./src/assets"],
-      "store/*": ["./src/store"],
-      "pages/*": ["./src/pages"],
-      "composables/*": ["./src/composables"],
-      "components/*": ["./src/components"]
+      "utils/*": ["src/utils/*"],
+      "router/*": ["src/router/*"],
+      "types/*": ["src/types/*"],
+      "assets/*": ["src/assets/*"],
+      "store/*": ["src/store/*"],
+      "pages/*": ["src/pages/*"],
+      "composables/*": ["src/composables/*"],
+      "components/*": ["src/components/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/shims-vue.d.ts"]

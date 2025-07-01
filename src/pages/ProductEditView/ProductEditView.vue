@@ -2,7 +2,9 @@
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useProductStore } from "../../store/productStore";
-import { type Product } from "types/productType";
+// Update the import path below to the correct relative path where your productType.ts file is located.
+// For example, if it's in src/types/productType.ts, use the following:
+import { type Product } from "../../types/productType";
 import ProductEditForm from "components/ProductEditForm/ProductEditForm.vue";
 import { useToast } from "composables/useToast";
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner.vue";
@@ -19,7 +21,7 @@ async function loadProduct() {
     await store.fetchProducts();
   }
 
-  const found = store.products.find((p) => p.id === id);
+  const found = store.products.find((p: Product) => p.id === id);
   if (found) {
     product.value = found;
   } else {
@@ -31,7 +33,7 @@ onMounted(loadProduct);
 
 const isSaving = ref(false);
 
-function fakeSave(updatedProduct: Product) {
+function fakeSave() {
   return new Promise<void>((resolve) => {
     setTimeout(() => {
       resolve();
@@ -42,7 +44,7 @@ function fakeSave(updatedProduct: Product) {
 async function onSave(updatedProduct: Product) {
   isSaving.value = true;
 
-  await fakeSave(updatedProduct);
+  await fakeSave();
 
   store.updateProduct(updatedProduct);
   isSaving.value = false;

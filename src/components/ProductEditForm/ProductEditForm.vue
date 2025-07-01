@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch, computed } from "vue";
 import { calculatePriceDetails } from "utils/price";
-import { Product } from "types/productType";
+import { type Product } from "types/productType";
 import "./ProductEditForm.scss";
 
 const props = defineProps<{ product: Product }>();
