@@ -30,7 +30,6 @@ function save() {
 
 <template>
   <form class="product-edit-form" @submit.prevent="save">
-    {{ form }}
     <label>
       Name
       <input v-model="form.title" required />
@@ -38,7 +37,7 @@ function save() {
 
     <label>
       Net Price (€)
-      <input type="number" v-model.number="form.price" min="0" required />
+      <input type="number" v-model.number="form.price" min="0" step="0.01" />
     </label>
 
     <label>
