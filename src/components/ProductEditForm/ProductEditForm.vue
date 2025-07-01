@@ -2,6 +2,7 @@
 import { ref, watch, computed } from "vue";
 import { calculatePriceDetails } from "utils/price";
 import { type Product } from "types/productType";
+import isEqual from "lodash/isEqual";
 import "./ProductEditForm.scss";
 
 const props = defineProps<{ product: Product }>();
@@ -11,6 +12,9 @@ const emit = defineEmits<{
 }>();
 
 const form = ref<Product>({ ...props.product });
+const isDirty = computed(() => {
+  return !isEqual(form.value, props.product);
+});
 
 watch(
   () => props.product,
@@ -26,6 +30,17 @@ const priceDetails = computed(() =>
 function save() {
   emit("save", { ...form.value });
 }
+function cancel() {
+  if (isDirty.value) {
+    const confirm = window.confirm(
+      "You have unsaved changes. Do you really want to discard them?"
+    );
+    if (!confirm) return;
+  }
+  form.value = props.product;
+  emit("cancel");
+}
+
 </script>
 
 <template>
@@ -70,7 +85,7 @@ function save() {
       </button>
       <button
         type="button"
-        @click="$emit('cancel')"
+        @click="() => cancel()"
         class="product-edit-form__button product-edit-form__button--cancel"
       >
         Cancel

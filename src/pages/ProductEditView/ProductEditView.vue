@@ -14,6 +14,8 @@ const toast = useToast();
 const id = Number(route.params.id);
 const product = ref<Product | null>(null);
 
+const isSaving = ref(false);
+
 async function loadProduct() {
   if (store.products.length === 0) {
     await store.fetchProducts();
@@ -29,11 +31,10 @@ async function loadProduct() {
 
 onMounted(loadProduct);
 
-const isSaving = ref(false);
-
-function fakeSave() {
+function fakeSave(updatedProduct: Product) {
   return new Promise<void>((resolve) => {
     setTimeout(() => {
+      store.updateProduct(updatedProduct);
       resolve();
     }, 1000);
   });
@@ -42,9 +43,7 @@ function fakeSave() {
 async function onSave(updatedProduct: Product) {
   isSaving.value = true;
 
-  await fakeSave();
-
-  store.updateProduct(updatedProduct);
+  await fakeSave(updatedProduct);
   isSaving.value = false;
   toast.show("Product saved!");
   router.push("/");
