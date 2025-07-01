@@ -141,8 +141,7 @@ npm run test
 
 ## 🚀 Author
 
-\[Saksham garg]
-[GitHub Profile](#https://github.com/Saksham-garg)
+\[Saksham garg][GitHub Profile](https://github.com/Saksham-garg)
 
 ---
 
