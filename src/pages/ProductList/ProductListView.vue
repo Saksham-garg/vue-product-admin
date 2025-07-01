@@ -4,9 +4,10 @@ import { useRouter } from "vue-router";
 import { useProductStore } from "../../store/productStore";
 import { storeToRefs } from "pinia";
 import ProductCard from "components/ProductCard/ProductCard.vue";
+import ProductCardSkeleton from "components/ProductCardSkeleton/ProductCardSkeleton.vue";
 
 const store = useProductStore();
-const { products } = storeToRefs(store);
+const { products, loading } = storeToRefs(store);
 const router = useRouter();
 
 onMounted(() => {
@@ -34,12 +35,17 @@ function editProduct(id: number) {
     </div>
 
     <div class="product-list__grid">
-      <ProductCard
-        v-for="p in products"
-        :key="p.id"
-        :product="p"
-        @edit="editProduct(p.id)"
-      />
+      <template v-if="loading">
+        <ProductCardSkeleton v-for="n in 10" :key="n" />
+      </template>
+      <template v-else>
+        <ProductCard
+          v-for="p in products"
+          :key="p.id"
+          :product="p"
+          @edit="() => editProduct(p.id)"
+        />
+      </template>
     </div>
   </div>
 </template>
