@@ -26,6 +26,7 @@ async function loadProduct() {
     product.value = found;
   } else {
     product.value = null;
+    router.replace("/");
   }
 }
 
